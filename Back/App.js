@@ -13,13 +13,7 @@ pool.query('SELECT NOW()', (err, res) => {
   console.log(err, res)
   pool.end()
 })
-const client = new Client({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_BASE,
-    password: process.env.DB_PASS,
-    port: 3211,
-})
+const client = new Client(process.env.DATABASE_URL)
 client.connect()
 client.query('SELECT NOW()', (err, res) => {
   console.log(err, res)
