@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build --dest build",
+        "lint": "vue-cli-service lint",
+        "start": "node App.js"
+    }
+}

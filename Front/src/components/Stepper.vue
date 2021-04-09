@@ -1,33 +1,33 @@
 <template>
 <div class="bg">
+  <div class="space"></div>
   <div id="app" class="container">
     <v-app id="inspire">
       <div class="container-header">
         <v-img
           max-height="150"
-          max-width="150"
-          src="../assets/mydigitalschool.jpg"
+          max-width="100"
+          src="../assets/mydigitalschool.png"
         ></v-img>
         <h2>
           Formulaire - MyDigitalSchool
         </h2>
+        <div>
+          
+        </div>
       </div>
       <v-stepper v-model="e1" class="stepper">
         <v-stepper-header class="stepper">
           <v-stepper-step :complete="e1 > 1" step="1">
-            Etape 1
           </v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step :complete="e1 > 2" step="2">
-            Etape 2
           </v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step :complete="e1> 3" step="3">
-            Etape 3
           </v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step :complete="e1 > 4" step="4">
-            Confirmation
           </v-stepper-step>
         </v-stepper-header>
         <v-stepper-items>
@@ -51,7 +51,7 @@
           <v-stepper-content step="3">
             <Step3 />
             <div class="container-btn">
-            <v-btn class="btn" elevation="2" large @click="e1 = 4">
+            <v-btn class="btn" elevation="2" large @click="e1 = 4; show = !show">
               Envoyer
             </v-btn>
             <v-btn text @click="e1 = 2" class="btn-back">
@@ -69,6 +69,8 @@
       </v-stepper>
     </v-app>
   </div>
+    <div class="space"></div>
+    <div class="space"></div>
 </div>
 </template>
 <script>
@@ -87,9 +89,11 @@ export default {
   data() {
     return {
       e1: 1,
+      show:true,
     };
   } 
 };
+
 </script>
 <style>
 .container {
@@ -97,14 +101,16 @@ export default {
   border-radius: 32px;
   width:100%;
   max-width: 70rem;
-  margin-top:3rem;
   padding: 1rem;
-  min-height: 0vh !important;
+  height: auto !important;
+  font-family: 'Karla', sans-serif;
 }
 .container-header {
   background-color: #F6FBF9;
   display:flex;
   justify-content:space-around;
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
 }
 .stepper {
   background-color: #F6FBF9 !important;
@@ -121,16 +127,45 @@ export default {
   border-radius:10px;
   transition-duration: 0.4s;
   color: #FFFFFF !important;
+  margin-top: 2em;
+  margin-bottom: 2em;
+
 }
 .container-btn {
   display: flex !important;
   flex-direction: row-reverse !important;
   justify-content: space-between !important;
+
 }
 .btn-back {
   background-color: #9D9D9D !important;
   border-radius:10px;
   transition-duration: 0.4s;
   color: #FFFFFF !important;
+  height: 45px !important;
+  min-width: 78px !important;
+  margin-top: 2em;
+  margin-bottom: 2em;
+
+}
+.v-stepper__step__step {
+  width:50px !important;
+  height:50px !important
+}
+.v-application .primary {
+    background-color: #62D5DD !important;
+    border-color: #62D5DD !important;
+}
+.v-application--wrap {
+  min-height: initial !important;
+}
+.space {
+  height: 5em;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

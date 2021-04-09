@@ -3,57 +3,69 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <InputSelect label='Civilité' :items='items'></InputSelect>
+          <InputSelect label="Civilité" :items="items"></InputSelect>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText label='Prénom'></InputText>
+          <InputText
+            label="Prénom"
+            placeholder="Léa"
+            :rules="firstNameRules"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText label='Nom'></InputText>
+          <InputText
+            label="Nom"
+            placeholder="Dupont"
+            :rules="lastNameRules"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText label='Téléphone Mobile' :rules='mobilePhoneRules'></InputText>
+          <InputText
+            label="Téléphone Mobile"
+            :rules="mobilePhoneRules"
+            placeholder="0601020304"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
-          <v-text-field
+          <InputText
             v-model="phone"
-            :rules="phoneRules"
-            :counter="10"
             label="Téléphone fixe"
-            required
-          ></v-text-field>
+            :rules="phoneRules"
+            placeholder="0401020304"
+            :counter="10"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
-          <v-text-field
+        <InputText
             v-model="email"
             :rules="emailRules"
             label="E-mail"
-            required
-          ></v-text-field>
+            placeholder="lea.dupont@gmail.com"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
-          <v-text-field
+        <InputText
             v-model="postal"
             :rules="postalRules"
             :counter="5"
             label="Code Postal"
-            required
-          ></v-text-field>
+            placeholder="69001"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
-          <v-text-field
+        <InputText
             v-model="city"
             :rules="cityRules"
             label="Ville"
-            required
-          ></v-text-field>
+            placeholder="Lyon"
+          ></InputText>
         </v-col>
 
         <v-col cols="12" md="4">
@@ -93,16 +105,16 @@
 </template>
 
 <script>
-import InputText from '../components/input/InputText'
-import InputSelect from '../components/input/InputSelect'
+import InputText from "../components/input/InputText";
+import InputSelect from "../components/input/InputSelect";
 
 export default {
   name: "Step1",
   components: {
     InputText,
-    InputSelect
+    InputSelect,
   },
-  data: vm => ({
+  data: (vm) => ({
     valid: false,
     firstname: "",
     firstNameRules: [(v) => !!v || "Le prénom est obligatoire"],
@@ -141,32 +153,32 @@ export default {
   }),
 
   watch: {
-      menu (val) {
-        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-        this.dateFormatted = this.formatDate(this.birthdate)
-      },
+    menu(val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
+      this.dateFormatted = this.formatDate(this.birthdate);
+    },
+  },
+
+  computed: {
+    computedDateFormatted() {
+      return this.formatDate(this.birthdate);
+    },
+  },
+
+  methods: {
+    save(birthdate) {
+      this.$refs.menu.save(birthdate);
     },
 
-    computed: {
-      computedDateFormatted () {
-        return this.formatDate(this.birthdate)
-      },
+    formatDate(birthdate) {
+      const [year, month, day] = birthdate.split("-");
+      return `${day}/${month}/${year}`;
     },
 
-    methods: {
-      save (birthdate) {
-        this.$refs.menu.save(birthdate)
-      },
-
-      formatDate (birthdate) {
-        const [year, month, day] = birthdate.split('-')
-        return `${day}/${month}/${year}`
-      },
-
-      parseDate (birthdate) {
-        const [day, month, year] = birthdate.split('/')
-        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-      },
+    parseDate(birthdate) {
+      const [day, month, year] = birthdate.split("/");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     },
+  },
 };
 </script>

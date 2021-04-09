@@ -15,7 +15,8 @@
           <v-text-field
             class="input"
             v-model="study_city"
-            label="J'étuidie dans la ville de :"
+            label="J'étudie dans la ville de :"
+            placeholder="Lyon"
             required
           ></v-text-field>
         </v-col>
@@ -26,14 +27,16 @@
             class="input"
             v-model="specialite"
             label="Specialité"
+            placeholder="Veuillez saisir votre spécialité..."
             required
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4">
           <v-select
             class="input"
-            v-model="select_year"
+            v-model="items_year"
             label="Je recherche une formation pour la rentrée :"
+            placeholder="2022"
             :items_year="items_year"
             required
           ></v-select>
@@ -47,6 +50,7 @@
 export default {
   components: {},
   data: () => ({
+    valid: false,
     select: "Collège",
     items: [
       "Collège",
@@ -59,10 +63,13 @@ export default {
       "BAC+4",
       "BAC+5",
     ],
-    specialite: "Veuillez saisir votre spécialité",
-    study_city: "Lyon",
-    select_year: "2022",
-    items_year: ["2022", "2023", "2024"],
+    items_year: [
+    "2022", 
+    "2023", 
+    "2024"
+    ],
+    study_city: "",
+    specialite: ""
   }),
 
   methods: {
@@ -79,7 +86,7 @@ export default {
 
 <style>
 .input input::placeholder {
-  color: green !important;
+  color:#B8BCCA !important;
   opacity: 1;
 }
 </style>
