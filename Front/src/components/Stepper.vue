@@ -1,0 +1,136 @@
+<template>
+<div class="bg">
+  <div id="app" class="container">
+    <v-app id="inspire">
+      <div class="container-header">
+        <v-img
+          max-height="150"
+          max-width="150"
+          src="../assets/mydigitalschool.jpg"
+        ></v-img>
+        <h2>
+          Formulaire - MyDigitalSchool
+        </h2>
+      </div>
+      <v-stepper v-model="e1" class="stepper">
+        <v-stepper-header class="stepper">
+          <v-stepper-step :complete="e1 > 1" step="1">
+            Etape 1
+          </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1 > 2" step="2">
+            Etape 2
+          </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1> 3" step="3">
+            Etape 3
+          </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1 > 4" step="4">
+            Confirmation
+          </v-stepper-step>
+        </v-stepper-header>
+        <v-stepper-items>
+          <v-stepper-content step="1">
+            <Step1 />
+              <v-btn class="btn" elevation="2" large @click="e1 = 2">
+                Suivant
+              </v-btn>
+          </v-stepper-content>
+          <v-stepper-content step="2">
+            <Step2 />
+            <div class="container-btn">
+              <v-btn class="btn" elevation="2" large @click="e1 = 3">
+                Suivant
+              </v-btn>
+              <v-btn text @click="e1 = 1" class="btn-back" >
+                Retour
+              </v-btn>
+            </div>
+          </v-stepper-content>
+          <v-stepper-content step="3">
+            <Step3 />
+            <div class="container-btn">
+            <v-btn class="btn" elevation="2" large @click="e1 = 4">
+              Envoyer
+            </v-btn>
+            <v-btn text @click="e1 = 2" class="btn-back">
+              Retour
+            </v-btn>
+            </div>
+          </v-stepper-content>
+          <v-stepper-content step="4">
+            <Step4 />
+            <v-btn text @click="e1 = 3" class="btn-back">
+              Retour
+            </v-btn>
+          </v-stepper-content>
+        </v-stepper-items>
+      </v-stepper>
+    </v-app>
+  </div>
+</div>
+</template>
+<script>
+import Step1 from "./Step1";
+import Step2 from "./Step2";
+import Step3 from "./Step3";
+import Step4 from './Step4';
+export default {
+  name: "Stepper",
+  components: {
+    Step1,
+    Step2,
+    Step3,
+    Step4
+  },
+  data() {
+    return {
+      e1: 1,
+    };
+  } 
+};
+</script>
+<style>
+.container {
+  background-color: #F6FBF9;
+  border-radius: 32px;
+  width:100%;
+  max-width: 70rem;
+  margin-top:3rem;
+  padding: 1rem;
+  min-height: 0vh !important;
+}
+.container-header {
+  background-color: #F6FBF9;
+  display:flex;
+  justify-content:space-around;
+}
+.stepper {
+  background-color: #F6FBF9 !important;
+  box-shadow:none !important;
+  border:0 none !important;
+  outline:0 !important;
+}
+.bg {
+  background-image: url("../assets/bg.jpg");
+  background-repeat:no-repeat;
+}
+.btn {
+  background-color: #62D5DD !important;
+  border-radius:10px;
+  transition-duration: 0.4s;
+  color: #FFFFFF !important;
+}
+.container-btn {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  justify-content: space-between !important;
+}
+.btn-back {
+  background-color: #9D9D9D !important;
+  border-radius:10px;
+  transition-duration: 0.4s;
+  color: #FFFFFF !important;
+}
+</style>
