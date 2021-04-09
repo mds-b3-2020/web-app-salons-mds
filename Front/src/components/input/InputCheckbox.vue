@@ -12,7 +12,7 @@
 
 <script>
 export default{
-    name: 'InputText',
+    name: 'InputSelect',
     props:{
         label: String,
         items: Array

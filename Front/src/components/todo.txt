@@ -1,0 +1,3 @@
+vérif des formulaires et empecher le bouton "suivant" si erreur
+rafraichir la page d'accueil a l'envoi
+cabler le front au back

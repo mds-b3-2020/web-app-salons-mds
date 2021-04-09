@@ -29,6 +29,8 @@ export default {
     
     mounted (){
   axios
+   .get('http://localhost:8010')
+      .then(response => (this.info = response))
     }
     //
   }),

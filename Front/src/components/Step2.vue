@@ -3,43 +3,54 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <v-select
+          <InputSelect
             class="input"
-            v-model="select"
+            v-model="etudes"
             label="Je suis actuellement en :"
-            :items="items"
+            placeholder="Terminale"
+            :items="etudes"
             required
-          ></v-select>
+          ></InputSelect>
         </v-col>
         <v-col cols="12" md="4">
-          <v-text-field
+          <InputText
             class="input"
             v-model="study_city"
             label="J'étudie dans la ville de :"
             placeholder="Lyon"
             required
-          ></v-text-field>
+          ></InputText>
+        </v-col>
+        <v-col cols="12" md="4">
+          <InputText
+            class="input"
+            v-model="specialite"
+            label="Veuillez saisir votre spécialité..."
+            placeholder="..."
+            required
+          ></InputText>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" md="4">
-          <v-text-field
+          <InputSelect
             class="input"
-            v-model="specialite"
-            label="Specialité"
-            placeholder="Veuillez saisir votre spécialité..."
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" md="4">
-          <v-select
-            class="input"
-            v-model="items_year"
+            v-model="sessions"
             label="Je recherche une formation pour la rentrée :"
             placeholder="2022"
-            :items_year="items_year"
+            :items="sessions"
             required
-          ></v-select>
+          ></InputSelect>
+        </v-col>
+        <v-col cols="12" md="4">
+          <InputSelect
+            class="input"
+            v-model="formations"
+            label="Je m’intéresse à la formation :"
+            placeholder="1ère année Cycle Web et Multimédia"
+            :items="formations"
+            required
+          ></InputSelect>
         </v-col>
       </v-row>
     </v-container>
@@ -47,12 +58,16 @@
 </template>
 
 <script>
+import InputText from "../components/input/InputText";
+import InputSelect from "../components/input/InputSelect";
 export default {
-  components: {},
+  components: {
+    InputText,
+    InputSelect,
+  },
   data: () => ({
     valid: false,
-    select: "Collège",
-    items: [
+    etudes: [
       "Collège",
       "Seconde",
       "Première",
@@ -63,10 +78,14 @@ export default {
       "BAC+4",
       "BAC+5",
     ],
-    items_year: [
+    sessions: [
     "2022", 
     "2023", 
     "2024"
+    ],
+    formations: [
+      "1ère année Cycle Web et Multimédia ",
+      "2ème année Cycle Web et Multimédia"
     ],
     study_city: "",
     specialite: ""

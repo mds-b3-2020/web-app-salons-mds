@@ -152,6 +152,7 @@ export default {
     birthDateRules: [(v) => !!v || "La date de naissance est obligatoire"],
   }),
 
+
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));

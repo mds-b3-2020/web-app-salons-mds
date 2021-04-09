@@ -33,9 +33,12 @@
         <v-stepper-items>
           <v-stepper-content step="1">
             <Step1 />
+            <div class="container-btn">
               <v-btn class="btn" elevation="2" large @click="e1 = 2">
                 Suivant
               </v-btn>
+              <div></div>
+              </div>
           </v-stepper-content>
           <v-stepper-content step="2">
             <Step2 />
@@ -61,8 +64,8 @@
           </v-stepper-content>
           <v-stepper-content step="4">
             <Step4 />
-            <v-btn text @click="e1 = 3" class="btn-back">
-              Retour
+            <v-btn text @click="e1 = 1" class="btn-back">
+              Retour a la première page
             </v-btn>
           </v-stepper-content>
         </v-stepper-items>
@@ -121,6 +124,7 @@ export default {
 .bg {
   background-image: url("../assets/bg.jpg");
   background-repeat:no-repeat;
+  background-size:cover;
 }
 .btn {
   background-color: #62D5DD !important;
@@ -161,11 +165,5 @@ export default {
 }
 .space {
   height: 5em;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>
