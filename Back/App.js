@@ -1,23 +1,23 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.ENV_PROD !== true) {
     require('dotenv').config();   
 }
-const { Client } = require('pg')
+const { Pool, Client } = require('pg')
 
 app.use(cors());
-const connectionString = process.env.DATABASE_URL;
-console.log(connectionString);
 
-const client = new Client({connectionString, ssl: { rejectUnauthorized: false }})
-client.connect()
-
-const ReadResponse = client.query('SELECT * FROM response', (err, res) => {
+const pool = new Pool(process.env.DATABASE_URL)
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
 })
-
-app.get("/responses", (req, res) => {
-  res.json(ReadResponse.fields);
+const client = new Client(process.env.DATABASE_URL)
+client.connect()
+client.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  client.end()
 })
 
 app.listen(8010, () => console.log("server is running"));
