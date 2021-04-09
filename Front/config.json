@@ -1,0 +1,69 @@
+{
+    "etudes": {
+        "College": "Collège",
+        "Seconde": "Première",
+        "Premiere": "Première",
+        "Terminale": "Terminale",
+        "BAC+1": "BAC+1",
+        "BAC+2": "BAC+2",
+        "BAC+3": "BAC+3",
+        "BAC+4": "BAC+4",
+        "BAC+5": "BAC+5"
+    },
+    "sessions": {
+        "2022": "2022",
+        "2023": "2023",
+        "2024": "2024"
+    },
+    "formations": {
+        "1ère année Cycle Web et Multimédia": "WEBD",
+        "2ème annéeCycle Web et Multimédia": "WEBD",
+        "3ème annéeWebdesign": "BWED",
+        "3ème année Webmarketing&Social Media": "BWSM",
+        "3ème année Développeur web": "BDEW",
+        "3ème année E-Business": "BEBU",
+        "4ème annéeMarketingDigital": "EWEB",
+        "4ème annéeDéveloppeur Full Stack": "AWEB",
+        "4ème annéeUX/UI Design": "UIUX",
+        "4ème annéeManagement de l’innovation digitale": "MID-",
+        "4ème annéeData Marketing": "DATA",
+        "5ème annéeMarketingDigital": "EWEB",
+        "5ème annéeDéveloppeur Full Stack": "AWEB",
+        "5ème annéeUX/UI Design": "UIUX",
+        "5ème annéeManagement de l’innovation digitale": "MID-",
+        "5ème annéeData Marketing": "DATA"
+    },
+    "creneaux": {
+        "Lundi": "Lundi",
+        "Mardi": "Mardi",
+        "Mercredi": "Mercredi",
+        "Jeudi": "Jeudi",
+        "Vendredi": "Vendredi"
+    },
+    "creneauxHeure": {
+        "9h-12h": "9h-12h",
+        "12h-14h": "12h-14h",
+        "14h-17h": "14h-17h",
+        "apres-17h": "après-17h"
+    },
+    "civilités": {
+        "Madame": "Madame",
+        "Monsieur": "Monsieur",
+        "Non-binaire": "Non-binaire"
+    },
+    "canauxAcquisitions": {
+        "Salon Etudiant": "Salon Etudiant",
+        "Forum Lycees": "Forum Lycees",
+        "Portes Ouvertes Virtuelles": "Portes Ouvertes Virtuelles",
+        "Bouche A Oreille": "Bouche A Oreille",
+        "Affiches En Ville": "Affiches En Ville",
+        "Autres": "Autres",
+        "Reseaux Sociaux": {
+            "Instagram": "Instagram",
+            "Facebook": "Facebook",
+            "Snapchat": "Snapchat",
+            "Linkedin": "Linkedin",
+            "Tiktok": "Tiktok"
+        }
+    }
+}

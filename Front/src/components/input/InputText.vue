@@ -3,6 +3,7 @@
         v-model='value'
         :rules='rules'
         :label='label'
+        :placeholder='placeholder'
         required
     ></v-text-field>
 </template>
@@ -12,7 +13,8 @@ export default{
     name: 'InputText',
     props:{
         label: String,
-        rules: Array
+        rules: Array,
+        placeholder: String,
     },
     data(){
         return{

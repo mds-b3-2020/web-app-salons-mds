@@ -1,4 +1,5 @@
 <template>
+
   <v-app>
     <v-app>
 <Stepper/>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+
 import Stepper from './components/Stepper';
 import axios from 'axios'
 
@@ -32,3 +34,5 @@ export default {
   }),
 };
 </script>
+<style>
+</style>
