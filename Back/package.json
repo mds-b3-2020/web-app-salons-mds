@@ -10,8 +10,5 @@
     "mysql": "^2.18.1",
     "node-excel-export": "^1.4.4",
     "pg": "^8.5.1"
-  },
-  "devDependencies": {
-    "cors": "^2.8.5"
   }
 }
