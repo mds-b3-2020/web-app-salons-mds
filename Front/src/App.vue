@@ -9,8 +9,7 @@
   
 <Stepper/>
   <v-main>
-    <Step1/>
-    <Step2/>
+
   </v-main>
 </v-app>
     <v-main>
@@ -21,8 +20,6 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
-import Step1 from './components/Step1';
-import Step2 from './components/Step2';
 import Stepper from './components/Stepper';
 import axios from 'axios'
 
@@ -31,8 +28,6 @@ export default {
 
   components: {
     HelloWorld,
-    Step1,
-    Step2,
     Stepper
   },
 
