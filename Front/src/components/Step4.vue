@@ -1,18 +1,15 @@
 <template>
-<div>
+  <div>Merci</div>
+</template>
 
-    </div>
-    </template>
-    
 <script>
 export default {
-  name: "my-component",
+    name: "Step4",
   data() {
     return {};
   },
-  mounted() {
-    this.$anime(/* ... animate something ... */)
-  },
+  
 }
-
 </script>
+
+
