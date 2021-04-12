@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const https = require('https');
 const joi = require('joi');
-if (process.env.ENV_PROD !== true) {
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();   
 }
 const { Pool, Client } = require('pg')
