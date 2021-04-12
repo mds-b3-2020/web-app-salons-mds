@@ -6,22 +6,20 @@ const joi = require('joi');
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();   
 }
-const { Pool, Client } = require('pg')
+const { Client } = require('pg')
 
+app.use(express.json());
 app.use(cors());
 
 const connectionString = process.env.DATABASE_URL;
-
-const pool = new Pool(process.env.DATABASE_URL)
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res)
-  pool.end()
-})
-const client = new Client(process.env.DATABASE_URL)
+const client = new Client({connectionString, ssl: { rejectUnauthorized: false }})
 client.connect()
-client.query('SELECT NOW()', (err, res) => {
-  console.log(err, res)
-  client.end()
+
+const ReadResponse = client.query('SELECT * FROM response', (err, res) => {
+})
+
+app.get("/responses", (req, res) => {
+  res.json(ReadResponse.fields);
 })
 
 //route qui permet de modifier les evenements
@@ -99,16 +97,6 @@ app.post("/response", ()=>{
   }).on('error', console.error);
 
   //on enregistre les données en base
-  client.query("INSERT INTO response () VALUES ()", (err,res)=>{
-    if(err){
-      return res.json({errorMail: "Problème lors de l'ajout des réponses de l'utilisateur"});
-    }
-  });
-});
-
-
-app.post("/responses", async (req, res) => {
-  console.log(req);
   const { nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, formation_souhaitee, is_initial, code_formation, creneau_journalier, crenaeu_horaire, canal_acquisition, note_echange, etudiant_spe, ville_etude } = req;
 
   await client.query(
@@ -116,12 +104,11 @@ app.post("/responses", async (req, res) => {
     [nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, formation_souhaitee, is_initial, code_formation, creneau_journalier, crenaeu_horaire, canal_acquisition, note_echange, etudiant_spe, ville_etude],
     (err, res) => {
       if (err) {
-        console.log(err);
+        return res.json({errorMail: "Problème lors de l'ajout des réponses de l'utilisateur"});
+
       }
-      console.log(res);
     }
-  )
-  res.json('all good !');
-})
+  ); 
+});
 
 app.listen(8010, () => console.log("server is running"));
