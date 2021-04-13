@@ -28,7 +28,7 @@ app.get("/responses", (req, res) => {
 app.put("/events/:id", (req, res)=>{
   const body = req.body;
   //on modifie l'event en base
-  client.query("UPDATE events SET libelle = '"+body.libelle+"' AND date = '"+body.date+"' WHERE id = "+req.params.id, (err)=>{
+  client.query("UPDATE event SET libelle_event = '"+body.libelle+"' AND date_event = '"+body.date+"' WHERE id = "+req.params.id, (err)=>{
     if(err){
       return res.json({error: "Problème lors de la modification de l'évènement"});
     } else {
