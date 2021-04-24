@@ -65,7 +65,6 @@ app.post("/events", (req, res)=>{
 
 app.post("/response", (req, res)=>{
   const body = req.body;
-  console.log(body);
   //on fait un test d'unicité sur l'email avec une requête WHERE
   client.query(`SELECT email FROM response WHERE email = '`+body.email+`'`, (err, result)=>{
     if(result.rows[0]){
