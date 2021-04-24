@@ -65,11 +65,12 @@ app.post("/events", (req, res)=>{
 
 app.post("/response", (req, res)=>{
   const body = req.body;
+  console.log(body);
   //on fait un test d'unicité sur l'email avec une requête WHERE
   client.query(`SELECT email FROM response WHERE email = '`+body.email+`'`, (err, result)=>{
     if(result.rows[0]){
       //si on a un résultat on retourne un message : l'email est déjà utilisé
-      return res.json({errorMail: "Cet email est déjà utilisé"});
+      return res.json({errmessage: "Cet email est déjà utilisé"});
     } else {
       //on fait les vérifications sur les informations récupérées
       const reponses = joi.object({
@@ -88,14 +89,14 @@ app.post("/response", (req, res)=>{
           response.setEncoding("utf8");
           response.on('data', ()=>{
             //on enregistre les données en base
-            const { nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, formation_souhaitee, is_initial, code_formation, creneau_journalier, crenaeu_horaire, canal_acquisition, note_echange, etudiant_spe, ville_etude } = req.body;
+            const { nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, crenaeu_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information } = req.body;
             client.query(
-              'INSERT INTO response (nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, formation_souhaitee, is_initial, code_formation, creneau_journalier, creneau_horaire, canal_acquisition, note_echange, etudiant_spe, ville_etude) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)',
-              [nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, formation_souhaitee, is_initial, code_formation, creneau_journalier, crenaeu_horaire, canal_acquisition, note_echange, etudiant_spe, ville_etude],
+              'INSERT INTO response (nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, creneau_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)',
+              [nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, crenaeu_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information],
               (err) => {
                 console.log(err);
                 if (err) {
-                  return res.json({errorMail: "Problème lors de l'ajout des réponses de l'utilisateur"});
+                  return res.json({errmessage: "Problème lors de l'ajout des réponses de l'utilisateur"});
 
                 } else {
                   return res.json({message: "Réponse enregistée"});
@@ -104,7 +105,7 @@ app.post("/response", (req, res)=>{
             );
           });
           response.on('error',(error)=>{
-            return res.json({errorMail: "Ce numéro de téléphone n'est pas valide"});
+            return res.json({errmessage: "Ce numéro de téléphone n'est pas valide"});
           });
         }).on('error', console.error);
       }
