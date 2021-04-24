@@ -1,7 +1,7 @@
 <template>
     <v-select
         v-model="value"
-        label="Civilité"
+        :label="label"
         :items="items"
         required
     ></v-select>
@@ -9,7 +9,7 @@
 
 <script>
 export default{
-    name: 'InputText',
+    name: 'InputSelect',
     props:{
         label: String,
         items: Array

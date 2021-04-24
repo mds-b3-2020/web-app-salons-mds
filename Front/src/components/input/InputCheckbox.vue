@@ -1,12 +1,12 @@
 <template>
     <v-container fluid>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
-      <v-checkbox v-model="value" label="souhait"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
+      <v-checkbox v-model="value" :label="label"></v-checkbox>
     </v-container>
 </template>
 

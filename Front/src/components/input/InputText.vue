@@ -1,10 +1,10 @@
 <template>
     <v-text-field
-        v-model='value'
         :rules='rules'
         :label='label'
         :placeholder='placeholder'
-        required
+        v-bind:value="value"
+        v-on:change="$emit('input', $event.target.value)"
     ></v-text-field>
 </template>
 
@@ -16,10 +16,9 @@ export default{
         rules: Array,
         placeholder: String,
     },
-    data(){
-        return{
-            value:''
-        }
-    }
+    model: {
+        prop: 'value',
+        event: 'change'
+    },
 }
 </script>
