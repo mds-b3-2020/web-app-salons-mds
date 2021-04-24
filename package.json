@@ -8,7 +8,7 @@
     "serve": "cd Front && vue-cli-service serve",
     "build": "cd Front && vue-cli-service build",
     "lint": "cd Front && vue-cli-service lint",
-    "start": "cd Back && node Back/App.js"
+    "start": "cd Back && node App.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
