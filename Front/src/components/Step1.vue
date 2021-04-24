@@ -3,69 +3,83 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <InputSelect label="Civilité" :items="items"></InputSelect>
+          <v-select
+            v-model="formData.civilite"
+            label="Civilité"
+            :items="items"
+            required
+          >
+          </v-select>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText
-            label="Prénom"
-            placeholder="Léa"
+          <v-text-field
+            v-model="formData.firstname"
             :rules="firstNameRules"
-          ></InputText>
+            label="Prénom *"
+            placeholder="Léa"
+            required
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText
-            label="Nom"
-            placeholder="Dupont"
+          <v-text-field
+            v-model="formData.lastname"
             :rules="lastNameRules"
-          ></InputText>
+            label="Nom *"
+            placeholder="Dupont"
+            required
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText
-            label="Téléphone Mobile"
-            :rules="mobilePhoneRules"
+          <v-text-field
+            v-model="formData.mobilephone"
+            :rules="lastNameRules"
+            label="Téléphone Mobile *"
             placeholder="0601020304"
-          ></InputText>
+            required
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
-          <InputText
-            v-model="phone"
-            label="Téléphone fixe"
+          <v-text-field
+            v-model="formData.phone"
             :rules="phoneRules"
+            label="Téléphone fixe"
             placeholder="0401020304"
             :counter="10"
-          ></InputText>
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
-        <InputText
-            v-model="email"
+          <v-text-field
+            v-model="formData.email"
             :rules="emailRules"
-            label="E-mail"
+            label="E-mail *"
             placeholder="lea.dupont@gmail.com"
-          ></InputText>
+            required
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
-        <InputText
-            v-model="postal"
+          <v-text-field
+            v-model="formData.postal"
             :rules="postalRules"
-            :counter="5"
-            label="Code Postal"
+            label="Code Postal *"
             placeholder="69001"
-          ></InputText>
+            required
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
-        <InputText
-            v-model="city"
+          <v-text-field
+            v-model="formData.city"
             :rules="cityRules"
-            label="Ville"
+            label="Ville *"
             placeholder="Lyon"
-          ></InputText>
+            required
+          ></v-text-field>
         </v-col>
 
         <v-col cols="12" md="4">
@@ -92,9 +106,9 @@
             </template>
             <v-date-picker
               ref="picker"
-              max="2011-12-31"
+              max="2009-12-31"
               locale="fr-FR"
-              v-model="birthdate"
+              v-model="formData.birthdate"
               @change="save"
             ></v-date-picker>
           </v-menu>
@@ -105,29 +119,36 @@
 </template>
 
 <script>
-import InputText from "../components/input/InputText";
-import InputSelect from "../components/input/InputSelect";
+//import InputText from "../components/input/InputText";
+//import InputSelect from "../components/input/InputSelect";
 
 export default {
   name: "Step1",
-  components: {
-    InputText,
-    InputSelect,
-  },
+  components: {},
   data: (vm) => ({
     valid: false,
-    firstname: "",
+    formData: {
+      civilite: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      mobilephone: "",
+      phone: "",
+      postal: "",
+      city: "",
+      birthdate: null,
+    },
+    dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
     firstNameRules: [(v) => !!v || "Le prénom est obligatoire"],
-    lastname: "",
+    items: ["Madame", "Monsieur", "Non Binaire"],
     lastNameRules: [(v) => !!v || "Le nom est obligatoire"],
-    email: "",
+
     emailRules: [
       (v) => !!v || "L'e-mail est obligatoire",
       (v) => /.+@.+/.test(v) || "L'e-mail doit être valide",
     ],
     select: null,
-    items: ["Madame", "Monsieur", "Non Binaire"],
-    mobilephone: "",
+
     mobilePhoneRules: [
       (v) => !!v || "Le téléphone mobile est obligatoire",
       (v) =>
@@ -135,19 +156,18 @@ export default {
           v
         ) || "Le téléphone mobile doit être valide",
     ],
-    phone: "",
+
     phoneRules: [
       (v) => v.length <= 10 || "Le téléphone fixe doit faire 10 chiffres",
     ],
-    postal: "",
+
     postalRules: [
       (v) => !!v || "Le code postal est obligatoire",
       (v) => v.length <= 5 || "Le code postal doit faire 5 chiffres",
     ],
-    city: "",
+
     cityRules: [(v) => !!v || "La ville est obligatoire"],
-    birthdate: null,
-    dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+
     menu: false,
     birthDateRules: [(v) => !!v || "La date de naissance est obligatoire"],
   }),
@@ -155,13 +175,29 @@ export default {
   watch: {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-      this.dateFormatted = this.formatDate(this.birthdate);
+      this.dateFormatted = this.formatDate(this.formData.birthdate);
+    },
+    formData: {
+      handler: function () {
+        this.$emit("newdata", [
+          this.formData.firstname,
+          this.formData.lastname,
+          this.formData.email,
+          this.formData.mobilephone,
+          this.formData.civilite,
+          this.formData.phone,
+          this.formData.postal,
+          this.formData.city,
+          this.formData.birthdate,
+        ]);
+      },
+      deep: true,
     },
   },
 
   computed: {
     computedDateFormatted() {
-      return this.formatDate(this.birthdate);
+      return this.formatDate(this.formData.birthdate);
     },
   },
 
