@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();   
 }
 const { Client } = require('pg')
+const excel = require('node-excel-export');
 
 app.use(express.json());
 app.use(cors());
@@ -148,5 +149,90 @@ app.post("/login", async (req, res) =>{
     } 
   });
 })
+
+//fonction excel
+app.get("/excel/:id", (req,res)=>{
+  //on créé le style pour les titres
+  const styles = {
+    header: {
+      font: {
+        color: {
+          rgb: '1f4e78'
+        },
+        bold: true
+      }
+    }
+  };
+  //on ajoute les cellules titre
+  const heading = [
+    [
+      {value:'IDIndividu', styles: styles.header}, 
+      {value:'Qui', style: styles.header},
+      {value:'LieuReunionInformation', style: styles.header}, 
+      {value:'Source', style: styles.header},
+      {value:'Datesalon', style: styles.header},
+      {value:'Initial', style: styles.header},
+      {value:'Alternance', style: styles.header},
+      {value:'FPC', style: styles.header},
+      {value:'Marques', style: styles.header},
+      {value:'Formation1', style: styles.header},
+      {value:'Formation2', style: styles.header},
+      {value:'Formation3', style: styles.header},
+      {value:'CiviliteIndividu', style: styles.header},
+      {value:'NomIndividu', style: styles.header},
+      {value:'PrenomIndividu', style: styles.header},
+      {value:'DateNaissance', style: styles.header},
+      {value:'etudePostBac', style: styles.header},
+      {value:'TelPortable', style: styles.header},
+      {value:'Email', style: styles.header},
+      {value:'Adresse1', style: styles.header},
+      {value:'Adresse2', style: styles.header},
+      {value:'Codepostal', style: styles.header},
+      {value:'Ville', style: styles.header},
+      {value:'Session', style: styles.header},
+      {value:'DernierDiplomeObtenu', style: styles.header},
+      {value:'TypeFormation', style: styles.header},
+      {value:'DateInscriptionRI', style: styles.header},
+      {value:'Commentaire', style: styles.header},
+      {value:'idmarques', style: styles.header}
+    ]
+  ];
+
+  const dataset = [];
+  //on récupère les données dans dataset
+  client.query("SELECT a.*, b.* FROM response a LEFT JOIN event b ON a.id_event = b.id WHERE a.id_event IN ($1)",[req.params.id], (err,result)=>{
+    
+    if(result.rows){
+      responses = result.rows;
+      dataset.push(responses);
+
+      //on ajoute les spcécifications
+      const specification = {}
+
+      //on ajoute les cellules fusionnées, ici il n'y en a pas
+      const merges = [];
+
+      //on créé l'export
+      const report = excel.buildExport(
+        [
+          {
+            name: 'CRM',
+            heading: heading,
+            merges: merges,
+            specification: specification,
+            data: dataset
+          }
+        ]
+      );
+      
+      //retourne le fichier
+      res.send(report);
+      return res.download('/CRM.xlsx');
+    } 
+  });
+  
+  
+  
+});
 
 app.listen(8010, () => console.log("server is running"));
