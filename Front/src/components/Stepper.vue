@@ -217,6 +217,7 @@ export default {
 .bg {
   background-image: url("../assets/bg.jpg");
   background-repeat: no-repeat;
+  background-size: cover
 }
 .btn {
   background-color: #62d5dd !important;
