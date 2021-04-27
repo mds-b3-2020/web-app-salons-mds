@@ -48,7 +48,7 @@
                   @click="
                     e1 = 4;
                     show = !show;
-                    handleSubmit()
+                    handleSubmit();
                   "
                 >
                   Envoyer
@@ -73,7 +73,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import Step4 from "./Step4";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Stepper",
@@ -108,13 +108,12 @@ export default {
         creneaux: "",
         souhait: "",
         other: "",
-        horaires: ""
+        horaires: "",
       },
-      message: ""
+      message: "",
     };
   },
-  watch: {
-  },
+  watch: {},
   methods: {
     handleDataStep1: function (e) {
       [
@@ -137,11 +136,11 @@ export default {
         this.student.sessions,
         this.student.codeFormation,
         this.student.is_initial,
-        this.student.is_alternance
+        this.student.is_alternance,
       ] = e;
     },
     handleDataStep3: function (e) {
-      [ 
+      [
         this.student.creneaux,
         this.student.horaires,
         this.student.note,
@@ -150,12 +149,11 @@ export default {
       ] = e;
     },
     async handleSubmit() {
-
       const data = {
-        nom: this.student.lastname ,
-        prenom: this.student.firstname, 
-        naissance: this.student.birthdate, 
-        civilite: this.student.civilite, 
+        nom: this.student.lastname,
+        prenom: this.student.firstname,
+        naissance: this.student.birthdate,
+        civilite: this.student.civilite,
         tel: this.student.mobilephone,
         fixe: this.student.phone,
         email: this.student.email,
@@ -168,26 +166,24 @@ export default {
         //formation_souhaitee: this.student.form,
         is_initial: this.student.is_initial,
         is_alternance: this.student.is_alternance,
-        lieu_reunion_information : "LYN",
+        lieu_reunion_information: "LYN",
         code_formation: this.student.codeFormation,
         creneau_journalier: this.student.creneaux,
         creneau_horaire: this.student.horaires,
         //canal_acquisition: this.student.,
         note_echange: this.student.note,
         etudiant_spe: this.student.specialite,
-        ville_etude: this.student.study_city
+        ville_etude: this.student.study_city,
       };
-      const response = await axios.post("http://localhost:8010/response", data)
+      const response = await axios.post("/response", data);
 
-      if (response.data.errmessage){
-        this.message = response.data.errmessage
+      if (response.data.errmessage) {
+        this.message = response.data.errmessage;
       } else {
-        this.message = response.data.message
-        window.location.reload()
+        this.message = response.data.message;
+        window.location.reload();
       }
-
-    }
-
+    },
   },
 };
 </script>
@@ -217,7 +213,7 @@ export default {
 .bg {
   background-image: url("../assets/bg.jpg");
   background-repeat: no-repeat;
-  background-size: cover
+  background-size: cover;
 }
 .btn {
   background-color: #62d5dd !important;
