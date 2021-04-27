@@ -57,7 +57,7 @@
               </div>
             </v-stepper-content>
             <v-stepper-content step="4">
-              <p id="errmsg">
+              <p v-if="errmessage" id="errmsg">
                 {{ errmessage }}. Veuillez corriger le(s) champ(s)
               </p>
               <Step4 v-if="!errmessage" />
