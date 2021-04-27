@@ -10,13 +10,20 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const { Client } = require('pg')
 const excel = require('node-excel-export');
+const path = __dirname + '/../Front/dist/';
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('public'));
+app.use(express.static(path));
 
 const connectionString = process.env.DATABASE_URL;
 const client = new Client({ connectionString, ssl: { rejectUnauthorized: false } })
 client.connect()
+
+app.get("/", (req, res) => {
+  res.sendFile(path + "index.html")
+})
 
 app.get("/responses", (req, res) => {
   client.query(`SELECT * FROM response`, (err, result) => {
@@ -235,4 +242,5 @@ app.get("/excel/:id", (req, res) => {
 
 });
 
-app.listen(process.env.PORT || 8010, () => console.log("server is running"));
+const port = process.env.PORT || 8010
+app.listen(port, () => console.log("server is running on", port));
