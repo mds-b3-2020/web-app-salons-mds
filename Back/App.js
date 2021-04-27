@@ -96,10 +96,10 @@ app.post("/response", (req, res) => {
           response.setEncoding("utf8");
           response.on('data', () => {
             //on enregistre les données en base
-            const { nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, crenaeu_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information } = req.body;
+            const { nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, creneau_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information } = req.body;
             client.query(
               'INSERT INTO response (nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, creneau_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22)',
-              [nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, crenaeu_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information],
+              [nom, prenom, naissance, civilite, tel, fixe, email, cp, ville, niveau_actuel, code_annee, souhait_contact, souhait_autre, is_initial, is_alternance, code_formation, creneau_journalier, creneau_horaire, note_echange, etudiant_spe, ville_etude, lieu_reunion_information],
               (err) => {
                 console.log(err);
                 if (err) {
