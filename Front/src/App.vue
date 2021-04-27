@@ -1,38 +1,8 @@
 <template>
-
-  <v-app>
-    <v-app>
-<Stepper/>
-  <v-main>
-
-  </v-main>
-</v-app>
-    <v-main>
-  
-    </v-main>
-  </v-app>
+  <div>
+    <router-view />
+  </div>
 </template>
 
-<script>
-
-import Stepper from './components/Stepper';
-import axios from 'axios'
-
-export default {
-  name: 'App',
-
-  components: {
-    Stepper
-  },
-
-  data: () => ({
-    
-    mounted (){
-  axios
-    }
-    //
-  }),
-};
-</script>
-<style>
+<style lang="scss">
 </style>
