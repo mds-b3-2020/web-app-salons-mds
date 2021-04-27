@@ -57,7 +57,10 @@
               </div>
             </v-stepper-content>
             <v-stepper-content step="4">
-              <Step4 />
+              <p id="errmsg">
+                {{ errmessage }}. Veuillez corriger le(s) champ(s)
+              </p>
+              <Step4 v-if="!errmessage" />
               <v-btn text @click="e1 = 3" class="btn-back"> Retour </v-btn>
             </v-stepper-content>
           </v-stepper-items>
@@ -110,7 +113,7 @@ export default {
         other: "",
         horaires: "",
       },
-      message: "",
+      errmessage: "",
     };
   },
   watch: {},
@@ -178,9 +181,8 @@ export default {
       const response = await axios.post("/response", data);
 
       if (response.data.errmessage) {
-        this.message = response.data.errmessage;
+        this.errmessage = response.data.errmessage;
       } else {
-        this.message = response.data.message;
         window.location.reload();
       }
     },
@@ -212,6 +214,7 @@ export default {
 }
 .bg {
   background-image: url("../assets/bg.jpg");
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -258,5 +261,9 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+#errmsg {
+  color: rgb(252, 85, 85);
+  font-weight: bold;
 }
 </style>
